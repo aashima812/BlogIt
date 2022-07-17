@@ -1,0 +1,24 @@
+<!-- # default name -->
+{% extends "blog/base.html" %}
+
+{% block content %}
+	<div class="content-section">
+		<form method="POST">
+			<!-- for security to protect the form but is important without this from wont work -->
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<!-- used to group together elements in form -->
+				<legend class="border-bottom mb-4">Delete Post</legend>
+				<h2> Are you sure you want to delete the post "{{ object.title }}" </h2>
+			</fieldset>
+			<!-- add form button it is not in the form variable -->
+			<div class="form-group">
+				<button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+				<a class="btn btn-outline-secondary" href="{% url 'blog-detail' object.id %}" >Cancel</a>
+				
+			</div>
+		</form>
+	</div>
+{% endblock content%}
+
+

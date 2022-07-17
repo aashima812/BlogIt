@@ -1,0 +1,38 @@
+
+{% extends "blog/base.html" %}
+<!-- that has to be overriden -->
+{% load crispy_forms_tags %}
+{% block content %}
+<!-- user is current logged in user and we dont have to make it, it is default -->
+	<div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.email }}</p>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+      <!-- for saving image in bg =enctype="multipart/form-data"-->
+      <form method="POST" enctype="multipart/form-data">
+      <!-- for security to protect the form but is important without this from wont work -->
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <!-- used to group together elements in form -->
+          <legend class="border-bottom mb-4">Profile Info</legend>
+          <!-- displaying from -->
+          <!-- form.as_p renders our form in paragraphs -->
+          {{ u_form|crispy}} 
+          {{ p_form|crispy}} 
+        </fieldset>
+        <!-- add form button it is not in the form variable -->
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit">Update and Save</button>
+          
+        </div>
+      </form>
+    </div>
+	
+{% endblock content%}
+
+
